@@ -1,4 +1,7 @@
 import time
+valid_coin = False 
+
+
 
 values = {
     "£2 Coin bag": {
@@ -54,18 +57,13 @@ for line in PRINT_STORED.splitlines():
 names.sort()
 number = 1
 
-print(f"| {'No.':<4} | {'Name':<18} | {'Coin Type':<12} | {'Weight of Bag':<15} |")
-print("-" * 64)
 
-for name, coin_type, weight_of_bag in names:
-    print(f"| {number:<4} | {name:<18} | {coin_type:<12} | {weight_of_bag:<15} |")
-    number += 1
 
-    time.sleep(0.25)
+time.sleep(0.25)
 print()
 print("1 - Add a new data")
-print("2 - Place Holder")
-print("3 - Place Holder")
+print("2 - Show table")
+print("3 - Remove data")
 print()
 time.sleep(0.50)
 
@@ -77,19 +75,48 @@ if user_input == "1":
     print()
     name_input = input("Please enter your name: ")
     print()
-    coin_input = input("Please enter your coin type: ")
+    while (not valid_coin):
+        coin_input = input("Please enter your coin type: ")
+        print()
+        if f"{coin_input} Coin bag" in values:
+            print("Valid coin type!")
+            valid_coin = True
+        else:
+            print("Invalid coin type!")
+            print()
+            valid_coin = False 
+
+    print()
+    weight_input_int = int(input("Please enter weight of the bag: "))  # makes it so users can only input numbers(int) for weight 
+    weight_input = str(weight_input_int)  # converts the weight from a int to a str so it can be written into the txt file
     print()
 
-    if f"{coin_input} Coin bag" in values:
-        print("Valid coin type!")
-    else:
-        print("Invalid coin type!")
-
-
-
-    print()
-    weight_input = input("Please enter weight of the bag: ")
-    print()
-
-    with open("CoinCOunt.txt", "a") as STORAGE_TXT:
+    with open("CoinCount.txt", "a") as STORAGE_TXT:
         STORAGE_TXT.write(name_input + " - " + coin_input + " - " + weight_input + "\n")
+
+elif user_input == "2":
+    print(f"| {'No.':<4} | {'Name':<18} | {'Coin Type':<12} | {'Weight of Bag (g)':<15} |")
+    print("-" * 64)
+
+    for name, coin_type, weight_of_bag in names:
+        print(f"| {number:<4} | {name:<18} | {coin_type:<12} | {weight_of_bag:<15} |")
+        number += 1
+
+elif user_input == "3":
+    print(f"| {'No.':<4} | {'Name':<18} | {'Coin Type':<12} | {'Weight of Bag (g)':<15} |")
+    print("-" * 64)
+    
+    for name, coin_type, weight_of_bag in names:
+        print(f"| {number:<4} | {name:<18} | {coin_type:<12} | {weight_of_bag:<15} |")
+        number += 1
+
+    print()
+    num_selection = int(input("Enter the number of the data to remove: "))
+    remove_data = names[num_selection -1]
+    names.remove(remove_data)
+
+    with open("CoinCount.txt", "w") as STORAGE_TXT:
+        for name, coin_type, weight_of_bag in names:
+            STORAGE_TXT.write(f"{name} - {coin_type} - {weight_of_bag}\n")
+            print("Data successfully removed!")
+            print()
