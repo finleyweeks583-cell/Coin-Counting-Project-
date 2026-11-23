@@ -6,35 +6,43 @@ valid_coin = False
 values = {
     "£2 Coin bag": {
         "bag value (£)": 20.00,
-        "weight of one coin (g)": 12.00
+        "weight of one coin (g)": 12.00,
+        "total weight (g)": 120.00
     },
     "£1 Coin bag": {
         "bag value (£)": 20.00,
-        "weight of one coin (g)": 8.75
+        "weight of one coin (g)": 8.75,
+        "total weight (g)": 175.00
     },
     "£0.50 Coin bag": {
         "bag value (£)": 10.00,
-        "weight of one coin (g)": 8.00
+        "weight of one coin (g)": 8.00,
+        "total weight (g)": 160.00
     },
     "£0.20 Coin bag": {
         "bag value (£)": 10.00,
-        "weight of one coin (g)": 5.00
+        "weight of one coin (g)": 5.00,
+        "total weight (g)": 250.00
     },
     "£0.10 Coin bag": {
         "bag value (£)": 5.00,
-        "weight of one coin (g)": 6.50
+        "weight of one coin (g)": 6.50,
+        "total weight (g)": 325.00
     },
     "£0.05 Coin bag": {
         "bag value (£)": 5.00,
-        "weight of one coin (g)": 3.25
+        "weight of one coin (g)": 3.25,
+        "total weight (g)": 325.00
     },
     "£0.02 Coin bag": {
         "bag value (£)": 1.00,
-        "weight of one coin (g)": 7.12
+        "weight of one coin (g)": 7.12,
+        "total weight (g)": 356.00
     },
     "£0.01 Coin bag": {
         "bag value (£)": 1.00,
-        "weight of one coin (g)": 3.56
+        "weight of one coin (g)": 3.56,
+        "total weight (g)": 356.00
     }
 }
 
