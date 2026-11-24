@@ -1,6 +1,6 @@
 import time
 valid_coin = False 
-
+valid_weight = False
 
 
 values = {
@@ -84,9 +84,9 @@ if user_input == "1":
     name_input = input("Please enter your name: ")
     print()
     while (not valid_coin):
-        coin_input = input("Please enter your coin type: ")
+        coin_input = input("Please enter your coin type: £")
         print()
-        if f"{coin_input} Coin bag" in values:
+        if f"£{coin_input} Coin bag" in values:
             print("Valid coin type!")
             valid_coin = True
         else:
@@ -95,27 +95,51 @@ if user_input == "1":
             valid_coin = False 
 
     print()
-    weight_input_int = int(input("Please enter weight of the bag: "))  # makes it so users can only input numbers(int) for weight 
-    weight_input = str(weight_input_int)  # converts the weight from a int to a str so it can be written into the txt file
-    print()
+    while (not valid_weight) :
+        weight_input_int = int(input("Please enter weight of the bag: "))  # makes it so users can only input numbers(int) for weight 
+        weight_input = str(weight_input_int)  # converts the weight from a int to a str so it can be written into the txt file
+        print()
+
+        correct_weight = values[f"£{coin_input} Coin bag"]["total weight (g)"]
+
+        if weight_input_int == values[f"£{coin_input} Coin bag"]["total weight (g)"]:
+            print("Correct weight!")
+            print()
+            valid_weight = True 
+
+        else:
+            print("Incorrect weight!")
+            print()
+            valid_weight = True
+            time.sleep(0.75)
+
+            missing_weight = correct_weight - weight_input_int 
+
+            if missing_weight > 0:
+                print(f"You are missing {missing_weight} grams!")
+                print()
+                
+            elif missing_weight < 0:
+                print(f"You are over by {abs(missing_weight)} grams!")
+                print()
 
     with open("CoinCount.txt", "a") as STORAGE_TXT:
         STORAGE_TXT.write(name_input + " - " + coin_input + " - " + weight_input + "\n")
 
 elif user_input == "2":
-    print(f"| {'No.':<4} | {'Name':<18} | {'Coin Type':<12} | {'Weight of Bag (g)':<15} |")
-    print("-" * 64)
+    print(f"| {'No.':<4} | {'Name':<18} | {'Coin Type':<12} | {'Weight of Bag (g)':<20} |")
+    print("-" * 69)
 
     for name, coin_type, weight_of_bag in names:
-        print(f"| {number:<4} | {name:<18} | {coin_type:<12} | {weight_of_bag:<15} |")
+        print(f"| {number:<4} | {name:<18} | {'£' + str(coin_type):<12} | {str(weight_of_bag) + ' grams':<20} |")
         number += 1
 
 elif user_input == "3":
-    print(f"| {'No.':<4} | {'Name':<18} | {'Coin Type':<12} | {'Weight of Bag (g)':<15} |")
-    print("-" * 64)
+    print(f"| {'No.':<4} | {'Name':<18} | {'Coin Type':<12} | {'Weight of Bag (g)':<20} |")
+    print("-" * 69)
     
     for name, coin_type, weight_of_bag in names:
-        print(f"| {number:<4} | {name:<18} | {coin_type:<12} | {weight_of_bag:<15} |")
+        print(f"| {number:<4} | {name:<18} | {'£' + str(coin_type):<12} | {str(weight_of_bag) + ' grams':<20} |")
         number += 1
 
     print()
